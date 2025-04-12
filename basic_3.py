@@ -109,9 +109,15 @@ if __name__ == '__main__':
         lst = [line.strip() for line in f if line.strip()]
 
     # generate the string str1 and str2
-    idx = len(lst) // 2
-    str1 = generate_string(lst[0], lst[1:idx])
-    str2 = generate_string(lst[idx], lst[idx + 1:])
+    s1_base = lst[0]
+    s2_base_idx = 1
+    while s2_base_idx < len(lst) and lst[s2_base_idx].isdigit():
+        s2_base_idx += 1
+    s1_indices = lst[1:s2_base_idx]
+    s2_base = lst[s2_base_idx]
+    s2_indices = lst[s2_base_idx+1:]
+    str1 = generate_string(s1_base, s1_indices)
+    str2 = generate_string(s2_base, s2_indices)
 
     # measure the time and memory consumption
     dp, time_taken = time_wrapper(str1, str2)
