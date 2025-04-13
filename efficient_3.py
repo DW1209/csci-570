@@ -178,11 +178,11 @@ if __name__ == '__main__':
         sys.exit(1)
 
     # Read the input file
-    input_file = sys.argv[1]
-    if not os.path.exists(input_file):
-        print(f'{input_file} does not exist.')
+    input_path = sys.argv[1]
+    if not os.path.exists(input_path):
+        print(f'{input_path} does not exist.')
         sys.exit(1)
-    with open(input_file, 'r') as f:
+    with open(input_path, 'r') as f:
         lst = [line.strip() for line in f if line.strip()]
 
     # Generate the string str1 and str2
@@ -201,8 +201,11 @@ if __name__ == '__main__':
     memory_consumed = process_memory()
 
     # Write the output to the output file
-    output_file = sys.argv[2]
-    with open(output_file, 'w') as f:
+    output_path = sys.argv[2]
+    output_dir = os.path.dirname(output_path)
+    if output_dir:
+        os.makedirs(output_dir, exist_ok=True)
+    with open(output_path, 'w') as f:
         f.write(f'{alignment_score}\n')
         f.write(f'{str1_align}\n')
         f.write(f'{str2_align}\n')
