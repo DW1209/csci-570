@@ -4,11 +4,17 @@ import subprocess
 
 
 if __name__ == '__main__':
+    # store the input files in the input directory
     input_dir = 'input'
-    output_dir = 'output'
     filenames = os.listdir(input_dir)
     filenames = [f for f in filenames if not f.startswith('.') and os.path.isfile(os.path.join(input_dir, f))]
 
+    # create the output directory if it does not exist
+    output_dir = 'output'
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+
+    # run the basic and efficient algorithms for each input file
     pattern = re.compile(r"in(\d+)\.txt")
     for filename in filenames:
         match = pattern.match(filename)

@@ -9,7 +9,6 @@ if __name__ == '__main__':
         2048, 2560, 3072, 3584, 3968
     ]
 
-    pics_dir = 'pics'
     output_dir = 'output'
     b_time, b_mem = list(), list()
     e_time, e_mem = list(), list()
@@ -31,6 +30,11 @@ if __name__ == '__main__':
                 else:
                     e_time.append(float(time))
                     e_mem.append(float(mem))
+
+    # create the pics directory if it does not exist
+    pics_dir = 'pics'
+    if not os.path.exists(pics_dir):
+        os.makedirs(pics_dir)
 
     # plot the cpu time
     plt.figure(figsize=(10, 6))
